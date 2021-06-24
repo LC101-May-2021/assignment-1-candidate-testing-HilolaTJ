@@ -3,9 +3,9 @@ const input = require('readline-sync');
 let candidateAnswers = [];
 
 function askForName(){
-let candidateName = "";
+//let candidateName = "";
   candidateName = input.question("Candidate Name:  ");
-  return;
+  return candidateName;
 }
 
 function askQuestion(arrOfQuestions){
