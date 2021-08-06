@@ -1,47 +1,53 @@
 const input = require('readline-sync');
 
-// TODO 2: modify your quiz app to ask 5 questions //
+let candidateAnswers = [];
 
-// TODO 1.1a: Define candidateName // 
-let candidateName;
-// TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
-let question;
-let correctAnswer;
-let candidateAnswer;
-let questions;
-let correctAnswers;
-let candidateAnswers;
-
-
-function askForName() {
-  // TODO 1.1b: Ask for candidate's name //
-
+function askForName(){
+//let candidateName = "";
+  candidateName = input.question("Candidate Name:  ");
+  return candidateName;
 }
 
-function askQuestion() {
-  // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-
-
+function askQuestion(arrOfQuestions){
+  for (let i=0; i < arrOfQuestions.length; i++) {
+candidateAnswers[i] = input.question(questions[i]);
+console.log(`Your answer: ${candidateAnswers[i]} \nCorrect answer: ${correctAnswers[i]}`);
+  }
 }
 
-function gradeQuiz(candidateAnswers) {
+const questions = ['1) Who was the first American woman in space? ', '\n2) True or false: 5000 meters = 5 kilometers. ', '\n3) (5 + 3)/2 * 10 = ? ', '\n4) Given the array [8, "Orbit", "Trajectory", 45], what entry is at index 2? ', '\n5) What is the minimum crew size for the International Space Station (ISS)? '];
 
-  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+const correctAnswers = ["Sally Ride", "True", "40", "Trajectory", "3"];
 
+function gradeQuiz(candidateAnswers){
+  let grade = 0;
+  let numberOfcorrectAnswers = 0;
+  for (let i=0; i < candidateAnswers.length; i++) {
 
-  let grade;
-  
+     if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
 
-  return grade;
+    numberOfcorrectAnswers += 1;
+    grade = numberOfcorrectAnswers/candidateAnswers.length*100;
+
+  }
 }
 
-function runProgram() {
+console.log(`\n>>> Overall Grade: ${grade}% (${numberOfcorrectAnswers} of ${candidateAnswers.length} responses correct) <<<`);
+
+if(grade >= 80){
+
+console.log (">>> Status: PASSED <<<");
+}else{
+  console.log (">>> Status: FAILED <<<")
+  }
+}
+
+function runProgram(){
   askForName();
-  // TODO 1.1c: Ask for candidate's name //
-  
-  askQuestion();
-  gradeQuiz(this.candidateAnswers);
+  askQuestion(questions);
+  gradeQuiz(candidateAnswers);
 }
+runProgram();
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
